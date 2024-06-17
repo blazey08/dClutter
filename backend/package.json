@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend for dClutter app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blazey08/dClutter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blazey08/dClutter/issues"
+  },
+  "homepage": "https://github.com/blazey08/dClutter#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
