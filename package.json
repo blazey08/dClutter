@@ -1,0 +1,12 @@
+{
+  "name": "dClutter",
+  "version": "1.0.0",
+  "scripts": {
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm run dev",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
