@@ -1,4 +1,6 @@
 const db = require("../database/database");
+const { deleteRecord, updateRecord, getAllRecords } = require("../utils/utils");
+const tableName = "apparels";
 
 const apparelType = {
   TOP: "Top",
@@ -27,16 +29,7 @@ class Apparel {
   }
 
   static all(callback) {
-    db.all(`SELECT * FROM apparels`, (err, rows) => {
-      if (err) {
-        return callback(err);
-      }
-      if (rows) {
-        callback(null, rows);
-      } else {
-        callback(null, null);
-      }
-    });
+    getAllRecords(tableName, callback);
   }
 
   static findByName(name, callback) {
@@ -52,6 +45,17 @@ class Apparel {
         callback(null, null);
       }
     });
+  }
+
+  static updateByName(name, newName, newType, callback) {
+    const updates = {};
+    if (newName) updates.name = newName;
+    if (newType) updates.type = newType;
+    updateRecord(tableName, "name", name, updates, callback);
+  }
+
+  static deleteByName(name, callback) {
+    deleteRecord(tableName, "name", name, callback);
   }
 }
 

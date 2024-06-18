@@ -9,6 +9,21 @@ function getOutfits(req, res) {
   });
 }
 
+function getOutfit(req, res) {
+  const { name } = req.param.name;
+  Outfit.findByName(name, (err, outfit) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ message: "Error getting outfit", error: err.message });
+    }
+    return res.status(200).json({
+      message: "Outfit data succesfully retrieved, ",
+      outfit: outfit,
+    });
+  });
+}
+
 function addOutfit(req, res) {
   console.log("Adding new outfit...");
   const { name, favorite } = req.body;
@@ -25,7 +40,53 @@ function addOutfit(req, res) {
   });
 }
 
+function updateOutfit(req, res) {
+  const { name, newName, newFavorite } = req.params;
+
+  if (!name) {
+    return res
+      .status(500)
+      .json({ error: "Outfit name not passed in, unable to update" });
+  }
+
+  if (!newName && !newFavorite) {
+    return res
+      .status(500)
+      .json({ error: "No new variables passed in, unable to update" });
+  }
+
+  Outfit.updateByName(name, newName, newFavorite, (err) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ message: "Error updating outfit", error: err.message });
+    }
+    return res.status(200).json({
+      message: "Outfit data succesfully updated",
+    });
+  });
+}
+
+function deleteOutfit(req, res) {
+  console.log("Deleting outfit");
+  const { name } = req.params;
+  console.log(name);
+  Outfit.deleteByName(name, (err) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ message: "Error deleting outfit", error: err.message });
+    }
+    return res.status(200).json({
+      message: "Outfit data succesfully deleted",
+    });
+  });
+}
+
 module.exports = {
   getOutfits,
+  getOutfit,
+  updateOutfit,
   addOutfit,
+  deleteOutfit,
 };

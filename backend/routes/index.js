@@ -9,6 +9,11 @@ router.get("/", (req, res) => {
 });
 
 router.post("/login", loginController.login);
-router.post("/register", loginController.registerUser);
+
+// User related routes
+router.get("/user/:name", loginController.getUser);
+router.get("/users", loginController.getUsers);
+router.post("/user/register", loginController.registerUser);
+router.delete("/user/:name", loginController.deleteUser);
 
 module.exports = router;
